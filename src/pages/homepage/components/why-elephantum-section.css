@@ -1,0 +1,220 @@
+.banner {
+    width: 100%;
+    height: 110vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    background-image: url("/public/assets/images/e31d4e9da43b7e815b97717c13a28228-Photoroom.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ================= SLIDER ================= */
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 20%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autorun 45s linear infinite;
+    z-index: 2;
+}
+
+@keyframes autorun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0;
+    transform:
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(500px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ================= CONTENT ================= */
+
+.banner .content_2 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    padding-bottom: 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner .content_2 h1 {
+    font-size: clamp(3.5rem, 14vw, 13.5rem);
+    line-height: 1;
+    color: #749873;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: relative;
+}
+
+.banner .content_2 h1::after {
+    position: absolute;
+    inset: 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: clamp(1px, 0.3vw, 2px) greenyellow;
+    color: transparent;
+}
+
+.banner .content_2 .author {
+    text-align: right;
+    max-width: 240px;
+}
+
+.banner .content_2 h2 {
+    font-size: clamp(1.2rem, 3vw, 3rem);
+}
+
+/* ================= MODEL IMAGE ================= */
+
+.model {
+    background-image: url("/public/assets/images/e31d4e9da43b7e815b97717c13a28228-removebg-preview.png");
+    width: 100%;
+    height: 110vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-size: auto clamp(70%, 120%, 130%);
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+/* ================= RESPONSIVE OVERRIDES ================= */
+
+/* Ultra small devices (240px – 480px) */
+@media (max-width: 480px) {
+    .banner {
+        height: 100vh;
+    }
+
+    .banner .slider {
+        width: 120px;
+        height: 160px;
+        top: 12%;
+        left: 50%;
+        transform: translateX(-50%) perspective(800px);
+    }
+
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(280px);
+    }
+
+    .banner .content_2 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+
+    .banner .content_2 .author {
+        text-align: center;
+        max-width: 90%;
+    }
+
+    .model {
+        height: 80vh;
+        background-size: auto 90%;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .banner .slider {
+        width: 160px;
+        height: 210px;
+    }
+
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(380px);
+    }
+}
+
+/* 4K screens */
+@media (min-width: 2560px) {
+    .banner {
+        height: 120vh;
+    }
+
+    .banner .slider {
+        width: 260px;
+        height: 330px;
+    }
+
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(650px);
+    }
+
+    .model {
+        background-size: auto 150%;
+    }
+}
+
+@media (max-width: 480px) {
+    .banner {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* Center everything horizontally */
+        justify-content: flex-end;
+        /* Keep content at bottom */
+        text-align: center;
+        /* Center text inside */
+    }
+
+    /* Hide the slider */
+    .banner .slider {
+        display: none;
+    }
+
+    .banner .content_2 {
+        flex-direction: column;
+        align-items: center;
+        /* Center content horizontally */
+        text-align: center;
+        padding-bottom: 3rem;
+    }
+
+    .banner .content_2 .author {
+        text-align: center;
+        /* Author text centered */
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    .model {
+        height: 80vh;
+        background-size: auto 90%;
+        background-position: top center;
+        /* Ensure model stays centered */
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+    }
+}
